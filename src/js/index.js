@@ -44,11 +44,15 @@ refs.btnLoadMoreEl.addEventListener('click', () => {
   const trimmedValue = refs.inputSearchImgEl.value.trim();
   refs.btnLoadMoreEl.style.display = 'none';
   fetchImages(trimmedValue, pageNumber).then(foundData => {
-    if (foundData.length.hits === 0) {
-      Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    if (foundData.hits.length === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
     } else {
       renderImagesList(foundData.hits);
-      Notiflix.Notify.success(`Hooray! We found ${foundData.totalHits} images.`);
+      Notiflix.Notify.success(
+        `Hooray! We found ${foundData.totalHits} images.`
+      );
       refs.btnLoadMoreEl.style.display = 'block';
     }
   });
@@ -56,9 +60,10 @@ refs.btnLoadMoreEl.addEventListener('click', () => {
 
 function renderImagesList(images) {
   console.log(images, 'images');
-    const markup = images.map(image => {
-        console.log('img', image);
-        return `
+  const markup = images
+    .map(image => {
+      console.log('img', image);
+      return `
         <div class="photo-card">
          <a href="${image.largeImageURL}">
          <img class="photo" src="${image.webformatURL}" 
@@ -79,8 +84,9 @@ function renderImagesList(images) {
     </p>
   </div>
 </div>`;
-    }).join('');
-    refs.listGalleryEl.innerHTML += markup;
+    })
+    .join('');
+  refs.listGalleryEl.innerHTML += markup;
 }
 
 function cleanGallery() {
