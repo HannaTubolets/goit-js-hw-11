@@ -84,6 +84,6 @@ export const fetchImages = async (inputValue, pageNr) => {
 // };
 
 
-fetchImages('cat', 2).then(data => {
-    console.log(data);
-});
+// fetchImages('cat', 2).then(data => {
+//     console.log(data);
+// });
